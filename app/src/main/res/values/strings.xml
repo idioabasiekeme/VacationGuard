@@ -1,0 +1,40 @@
+<resources>
+    <string name="app_name">VacationGuard</string>
+
+    <string name="splash_line1">This is an assignment by</string>
+    <string name="splash_ids">Abasiekeme Idio\nand\nEnobong Etteh</string>
+    <string name="splash_course">on Pervasive Computing</string>
+    <string name="splash_lecturer">by Dr. Ifreke J. Udoeka</string>
+    <string name="next">Next</string>
+
+    <string name="choose_mode">Choose the role of this phone</string>
+    <string name="home_id_hint">Home ID (same on both phones)</string>
+    <string name="home_id_required">Enter a Home ID of at least 4 characters — it links the two phones.</string>
+    <string name="home_mode">Home Mode\n(camera unit at the house)</string>
+    <string name="owner_mode">Owner Mode\n(remote monitoring)</string>
+    <string name="permissions_granted">Permissions granted — tap the mode again.</string>
+    <string name="permissions_needed">Camera and notification permissions are required.</string>
+
+    <string name="status_connecting">Connecting to cloud…</string>
+    <string name="status_armed">🟢 ARMED — watching for intruders</string>
+    <string name="status_disarmed">⚪ Disarmed</string>
+    <string name="arm">Arm</string>
+    <string name="disarm">Disarm</string>
+    <string name="motion_level">Motion level: %1$.1f</string>
+    <string name="alert_motion">🚨 MOTION DETECTED at %1$s!</string>
+    <string name="siren_on">🔊 SIREN ACTIVE (triggered by owner)</string>
+    <string name="home_hint">Leave this phone facing the area to protect. It detects motion, sends alerts and snapshots to the owner, and sounds the siren on command.</string>
+
+    <string name="home_online">🟢 Home unit ONLINE</string>
+    <string name="home_offline">🔴 Home unit OFFLINE — check power/network!</string>
+    <string name="waiting_for_home">Connected. Waiting for home unit…</string>
+    <string name="request_snapshot">📷 View now</string>
+    <string name="sound_siren">🔊 Sound siren</string>
+    <string name="stop_siren">Stop siren</string>
+    <string name="alert_title">⚠ VacationGuard alert</string>
+    <string name="channel_alerts">Intrusion alerts</string>
+    <string name="log_snapshot_requested">Snapshot requested…</string>
+    <string name="log_snapshot_received">Snapshot received (%1$d KB)</string>
+    <string name="log_siren_sent">Siren command sent.</string>
+    <string name="log_siren_off_sent">Siren stop command sent.</string>
+</resources>
