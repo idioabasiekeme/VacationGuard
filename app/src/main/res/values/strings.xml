@@ -37,4 +37,19 @@
     <string name="log_snapshot_received">Snapshot received (%1$d KB)</string>
     <string name="log_siren_sent">Siren command sent.</string>
     <string name="log_siren_off_sent">Siren stop command sent.</string>
+
+    <string name="splash_scroll">This is an assignment by Abasiekeme Idio and Enobong Etteh on Pervasive Computing by Dr. Ifreke J. Udoeka \u2022 VacationGuard \u2014 Intelligent Smart Home Security System \u2022 Vacation Home Monitoring \u2022 </string>
+    <string name="email_section">Email alerts (Home Mode, optional)</string>
+    <string name="email_from_hint">Sender Gmail address</string>
+    <string name="email_pass_hint">Gmail app password</string>
+    <string name="email_to_hint">Recipient email (owner)</string>
+    <string name="email_subject">VacationGuard ALERT \u2014 motion at home \u201c%1$s\u201d</string>
+    <string name="email_body">Motion was detected at %1$s (Home ID: %2$s). 20-second footage is attached.\n\n\u2014 VacationGuard</string>
+    <string name="email_sent">Alert email with footage sent.</string>
+    <string name="email_failed">Email failed: %1$s</string>
+    <string name="recording_footage">\ud83c\udfa5 Recording 20 s footage\u2026</string>
+    <string name="live_button">\u25b6 Live</string>
+    <string name="live_stop">\u23f9 Stop live</string>
+    <string name="log_live_on">Live feed started (auto-stops after 60 s).</string>
+    <string name="log_live_off">Live feed stopped.</string>
 </resources>
