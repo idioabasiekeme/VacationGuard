@@ -10,44 +10,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/app_name"
-        android:textSize="30sp"
+        android:textSize="34sp"
         android:textStyle="bold"
         android:textColor="@color/primary"
-        android:layout_marginBottom="32dp" />
+        android:layout_marginBottom="48dp" />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/txtScroll"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/splash_line1"
-        android:textSize="18sp"
-        android:gravity="center"
-        android:layout_marginBottom="12dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/splash_ids"
+        android:text="@string/splash_scroll"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:gravity="center"
-        android:layout_marginBottom="12dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/splash_course"
-        android:textSize="18sp"
-        android:gravity="center"
-        android:layout_marginBottom="4dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/splash_lecturer"
-        android:textSize="18sp"
-        android:textStyle="italic"
-        android:gravity="center"
-        android:layout_marginBottom="48dp" />
+        android:singleLine="true"
+        android:ellipsize="marquee"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:scrollHorizontally="true"
+        android:layout_marginBottom="64dp" />
 
     <Button
         android:id="@+id/btnNext"
