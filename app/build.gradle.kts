@@ -29,6 +29,8 @@ android {
     }
     packaging {
         resources.excludes += "META-INF/INDEX.LIST"
+        resources.excludes += "META-INF/NOTICE.md"
+        resources.excludes += "META-INF/LICENSE.md"
     }
 }
 
@@ -42,6 +44,10 @@ dependencies {
     implementation("androidx.camera:camera-camera2:$camerax")
     implementation("androidx.camera:camera-lifecycle:$camerax")
     implementation("androidx.camera:camera-view:$camerax")
+    implementation("androidx.camera:camera-video:$camerax")
 
     implementation("org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.2.5")
+
+    implementation("com.sun.mail:android-mail:1.6.7")
+    implementation("com.sun.mail:android-activation:1.6.7")
 }
