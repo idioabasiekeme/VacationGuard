@@ -21,9 +21,16 @@ class Mqtt(private val homeId: String) {
         const val T_ALERT = "alert"
         const val T_SNAPSHOT = "snapshot"
         const val T_CMD = "cmd"
+        const val T_LIVE = "live"
         const val CMD_SNAPSHOT = "SNAPSHOT"
         const val CMD_SIREN = "SIREN"
         const val CMD_SIREN_OFF = "SIREN_OFF"
+        const val CMD_LIVE_ON = "LIVE_ON"
+        const val CMD_LIVE_OFF = "LIVE_OFF"
+
+        const val EXTRA_EMAIL_FROM = "email_from"
+        const val EXTRA_EMAIL_PASS = "email_pass"
+        const val EXTRA_EMAIL_TO = "email_to"
     }
 
     private val client = MqttAsyncClient(
