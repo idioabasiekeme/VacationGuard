@@ -33,6 +33,8 @@ class OwnerActivity : AppCompatActivity() {
     private lateinit var logScroll: ScrollView
     private lateinit var snapshot: ImageView
     private var lastHeartbeat = 0L
+    private var liveOn = false
+    private lateinit var btnLive: Button
     private val handler = Handler(Looper.getMainLooper())
     private val fmt = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
 
@@ -71,6 +73,14 @@ class OwnerActivity : AppCompatActivity() {
             mqtt.publish(Mqtt.T_CMD, Mqtt.CMD_SIREN_OFF.toByteArray())
             appendLog(getString(R.string.log_siren_off_sent))
         }
+        btnLive = findViewById(R.id.btnLive)
+        btnLive.setOnClickListener {
+            liveOn = !liveOn
+            mqtt.publish(Mqtt.T_CMD,
+                (if (liveOn) Mqtt.CMD_LIVE_ON else Mqtt.CMD_LIVE_OFF).toByteArray())
+            btnLive.text = getString(if (liveOn) R.string.live_stop else R.string.live_button)
+            appendLog(getString(if (liveOn) R.string.log_live_on else R.string.log_live_off))
+        }
 
         createChannel()
         val homeId = intent.getStringExtra(Mqtt.EXTRA_HOME_ID) ?: "demo"
@@ -85,7 +95,7 @@ class OwnerActivity : AppCompatActivity() {
                     )
                 }
             },
-            subs = listOf(Mqtt.T_STATUS, Mqtt.T_ALERT, Mqtt.T_SNAPSHOT)
+            subs = listOf(Mqtt.T_STATUS, Mqtt.T_ALERT, Mqtt.T_SNAPSHOT, Mqtt.T_LIVE)
         )
         handler.post(watchdog)
     }
@@ -113,6 +123,10 @@ class OwnerActivity : AppCompatActivity() {
                     snapshot.setImageBitmap(bmp)
                     appendLog(getString(R.string.log_snapshot_received, payload.size / 1024))
                 }
+            }
+            Mqtt.T_LIVE -> {
+                val bmp = BitmapFactory.decodeByteArray(payload, 0, payload.size)
+                if (bmp != null) snapshot.setImageBitmap(bmp)
             }
         }
     }
