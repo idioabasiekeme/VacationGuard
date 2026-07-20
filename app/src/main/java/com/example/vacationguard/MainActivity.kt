@@ -19,12 +19,18 @@ import androidx.core.content.ContextCompat
 class MainActivity : AppCompatActivity() {
 
     private lateinit var edtHomeId: EditText
+    private lateinit var edtEmailFrom: EditText
+    private lateinit var edtEmailPass: EditText
+    private lateinit var edtEmailTo: EditText
     private var pendingTarget: Class<*>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         edtHomeId = findViewById(R.id.edtHomeId)
+        edtEmailFrom = findViewById(R.id.edtEmailFrom)
+        edtEmailPass = findViewById(R.id.edtEmailPass)
+        edtEmailTo = findViewById(R.id.edtEmailTo)
 
         findViewById<Button>(R.id.btnHomeMode).setOnClickListener {
             launchWithPermissions(HomeActivity::class.java,
@@ -53,7 +59,13 @@ class MainActivity : AppCompatActivity() {
             ContextCompat.checkSelfPermission(this, it) != PackageManager.PERMISSION_GRANTED
         }
         if (missing.isEmpty()) {
-            startActivity(Intent(this, target).putExtra(Mqtt.EXTRA_HOME_ID, homeId))
+            startActivity(
+                Intent(this, target)
+                    .putExtra(Mqtt.EXTRA_HOME_ID, homeId)
+                    .putExtra(Mqtt.EXTRA_EMAIL_FROM, edtEmailFrom.text.toString().trim())
+                    .putExtra(Mqtt.EXTRA_EMAIL_PASS, edtEmailPass.text.toString().trim())
+                    .putExtra(Mqtt.EXTRA_EMAIL_TO, edtEmailTo.text.toString().trim())
+            )
         } else {
             pendingTarget = target
             ActivityCompat.requestPermissions(this, missing.toTypedArray(), 1)
