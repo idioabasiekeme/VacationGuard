@@ -5,12 +5,16 @@ import androidx.camera.core.ImageProxy
 import kotlin.math.abs
 
 /**
- * Very small frame-differencing motion detector. The luminance (Y) plane
- * of each frame is averaged into a GRID x GRID matrix; the mean absolute
- * difference against the previous frame is the motion score.
+ * Frame-differencing motion detector + frame grabber. The luminance (Y)
+ * plane of each frame is averaged into a GRID x GRID matrix; the mean
+ * absolute difference against the previous frame is the motion score.
+ * When [frameWanted] returns true, the frame is also converted to NV21
+ * and handed to [onFrame] (used for snapshots and the live feed).
  */
 class MotionDetector(
-    private val onScore: (Double) -> Unit
+    private val onScore: (Double) -> Unit,
+    private val frameWanted: (() -> Boolean)? = null,
+    private val onFrame: ((nv21: ByteArray, width: Int, height: Int) -> Unit)? = null
 ) : ImageAnalysis.Analyzer {
 
     companion object { const val GRID = 8 }
@@ -52,6 +56,37 @@ class MotionDetector(
             onScore(diff / cur.size)
         }
         previous = cur
+
+        if (frameWanted?.invoke() == true) {
+            onFrame?.invoke(toNv21(image), w, h)
+        }
         image.close()
+    }
+
+    /** Converts a YUV_420_888 ImageProxy to an NV21 byte array. */
+    private fun toNv21(image: ImageProxy): ByteArray {
+        val w = image.width
+        val h = image.height
+        val nv21 = ByteArray(w * h * 3 / 2)
+        val yPlane = image.planes[0]
+        val uPlane = image.planes[1]
+        val vPlane = image.planes[2]
+
+        var pos = 0
+        val yBuf = yPlane.buffer
+        for (r in 0 until h) {
+            for (c in 0 until w) {
+                nv21[pos++] = yBuf.get(r * yPlane.rowStride + c * yPlane.pixelStride)
+            }
+        }
+        val uBuf = uPlane.buffer
+        val vBuf = vPlane.buffer
+        for (r in 0 until h / 2) {
+            for (c in 0 until w / 2) {
+                nv21[pos++] = vBuf.get(r * vPlane.rowStride + c * vPlane.pixelStride)
+                nv21[pos++] = uBuf.get(r * uPlane.rowStride + c * uPlane.pixelStride)
+            }
+        }
+        return nv21
     }
 }
